@@ -6,11 +6,13 @@ import NormalButton from "../Buttons/NormalButton"
 import { Select } from "antd"
 import SelectWeekDay from "./SelectWeekDay"
 import TimePickerUI from "./TimePickerUI"
-import { createShedule } from "@/lib/Apis/emailShedulesApis/api"
+import { createShedule, editShedule } from "@/lib/Apis/emailShedulesApis/api"
 import { EmailShedulesProps } from "@/lib/type"
 import { message } from "antd"
+import { getSingleShedule } from "@/lib/Apis/emailShedulesApis/api"
+import { useEffect, useCallback, useState } from "react"
 const CreateEditShedule = (props: CreateEditSheduleProps) => {
-    const { mode, setIsPopper, gettingShedules } = props
+    const { mode, setIsPopper, gettingShedules, sheduleId } = props
 
     const initialValues = {
         title: "",
@@ -20,6 +22,31 @@ const CreateEditShedule = (props: CreateEditSheduleProps) => {
         repeat: "",
         time: ""
     }
+
+
+
+    const getShedule = (id: string) => {
+        console.log("yo");
+        getSingleShedule(id).then((data) => {
+            console.log(data);
+            formik.setValues({
+                ...data
+            })
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+
+    const sheduleEdit = (values: EmailShedulesProps, id: string) => {
+        editShedule(values, id)
+            .then((data) => {
+                if (data.statusText == "OK") message.success("Shedule Edited Successfully")
+                gettingShedules();
+            }).catch((err) => {
+                console.log(err)
+            })
+    }
+
 
     const sheduleCreate = (values: EmailShedulesProps) => {
         createShedule(values)
@@ -36,7 +63,11 @@ const CreateEditShedule = (props: CreateEditSheduleProps) => {
         initialValues: initialValues,
         onSubmit: async (values, { resetForm }) => {
             try {
-                sheduleCreate(values)
+                if (mode === "create") {
+                    sheduleCreate(values)
+                } else if (mode === "edit" && sheduleId) {
+                    sheduleEdit(values, sheduleId)
+                }
                 resetForm()
                 setIsPopper(false);
             } catch (error) {
@@ -44,6 +75,12 @@ const CreateEditShedule = (props: CreateEditSheduleProps) => {
             }
         }
     })
+
+
+    useEffect(() => {
+        console.log("i ran", mode, sheduleId);
+        if (mode === "edit" && sheduleId) getShedule(sheduleId);
+    }, [mode, sheduleId]);
     return (
         <div className="w-[336px] h-[400px] flex flex-col gap-y-5">
             <h2 className="text-[16px] font-[600] text-[#333333]">{mode === "create" ? "Add" : "Edit"} Schedule</h2>
@@ -122,6 +159,7 @@ const CreateEditShedule = (props: CreateEditSheduleProps) => {
                         title="Time"
                     />
                     <TimePickerUI
+                        mode={mode}
                         formik={formik}
                     />
                 </div>
@@ -129,7 +167,11 @@ const CreateEditShedule = (props: CreateEditSheduleProps) => {
                 <div className="flex gap-x-[16px] ml-auto">
                     <button
                         onClick={(e) => {
-                            formik.handleReset(e)
+                            if (mode === "create") {
+                                formik.handleReset(e)
+                            } else {
+                                getShedule(sheduleId || "")
+                            }
                             setIsPopper(false)
                         }}
                         type="button"

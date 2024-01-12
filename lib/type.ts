@@ -49,3 +49,13 @@ export interface AddEditSheduleLabelProps {
     title: string
     className?: string
 }
+
+export interface PopoverEditProps {
+    gettingShedules: any;
+    sheduleId?: string
+}
+
+export interface TimePickerUIProps {
+    formik: any;
+    mode: "create" | "edit";
+}

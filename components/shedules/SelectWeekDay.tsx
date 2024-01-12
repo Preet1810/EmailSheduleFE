@@ -33,7 +33,6 @@ const week = [
 ]
 
 const SelectWeekDay = ({ formik }: any) => {
-    const [selected, setSelected] = useState<string>("")
     return (
         <div className="w-full flex gap-x-2 justify-between">
             {week.map((day, index) => (
@@ -41,9 +40,8 @@ const SelectWeekDay = ({ formik }: any) => {
                     key={index}
                     onClick={() => {
                         formik.setFieldValue('repeat', day.value)
-                        setSelected(day.value)
                     }}
-                    className={`rounded-full w-6 h-6 border border-gray-400 flex items-center justify-center cursor-pointer ${selected === day.value ? "bg-purple text-white" : ""}`}>
+                    className={`rounded-full w-6 h-6 border border-gray-400 flex items-center justify-center cursor-pointer ${formik.values.repeat === day.value ? "bg-purple text-white" : ""}`}>
                     <p className="text-[14px] font-[600] ">{day.label}</p>
                 </div>
             ))}

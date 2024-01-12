@@ -4,9 +4,16 @@ import { MdEdit } from "react-icons/md";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { ShedulesTableProps } from "@/lib/type";
 import { deleteShedule } from "@/lib/Apis/emailShedulesApis/api";
-import { message } from 'antd'
+import { message, Popover } from 'antd'
+import CreateEditShedule from "../shedules/CreateEditShedule";
+import { useState } from "react";
+import PopoverEdit from "../shedules/PopoverEdit";
 const EmailShedulesTable = (props: ShedulesTableProps) => {
     const { shedules, gettingShedules } = props;
+    // const handleOpenChange = (newOpen: boolean) => {
+    //     console.log(newOpen)
+    //     setIsPopper(newOpen);
+    // };
 
     const sheduleDelete = (id: string) => {
         deleteShedule(id).then((data) => {
@@ -47,7 +54,10 @@ const EmailShedulesTable = (props: ShedulesTableProps) => {
             title: 'Actions',
             dataIndex: '_id',
             render: (_, { _id }) => (<div className="flex gap-x-4 items-center text-lg">
-                <MdEdit className="cursor-pointer" />
+                <PopoverEdit
+                    gettingShedules={gettingShedules}
+                    sheduleId={_id}
+                />
                 <RiDeleteBin5Line
                     onClick={() => {
                         if (_id) sheduleDelete(_id)
@@ -64,7 +74,7 @@ const EmailShedulesTable = (props: ShedulesTableProps) => {
             <Table
                 loading={shedules ? false : true}
                 bordered={false}
-                scroll={{ x: 'max-content', y: `calc(100vh - 250px)` }}
+                scroll={{ x: 'max-content', }}
                 columns={columns}
                 dataSource={shedules}
                 rowKey={"_id"}
