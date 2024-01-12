@@ -33,7 +33,7 @@ export interface EmailShedulesProps {
 }
 
 export interface ShedulesTableProps {
-    shedules: EmailShedulesProps[]
+    shedules: EmailShedulesProps[] | undefined
 }
 
 export interface CreateEditSheduleProps {

@@ -9,3 +9,7 @@
 .ant-picker-footer .ant-picker-ranges .ant-picker-ok button {
     color: black;
 }
+
+thead[class*="ant-table-thead"] th {
+    background-color: #28153c42 !important;
+}

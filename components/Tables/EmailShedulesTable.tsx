@@ -3,7 +3,6 @@ import { EmailShedulesProps } from "@/lib/type";
 import { MdEdit } from "react-icons/md";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { ShedulesTableProps } from "@/lib/type";
-import "./shedules.css"
 const EmailShedulesTable = (props: ShedulesTableProps) => {
     const { shedules } = props;
 
@@ -44,7 +43,7 @@ const EmailShedulesTable = (props: ShedulesTableProps) => {
     return (
         <div className="flex flex-col flex-grow overflow-y-auto  w-full">
             <Table
-                // loading={users ? false : true}
+                loading={shedules ? false : true}
                 bordered={false}
                 scroll={{ x: 'max-content' }}
                 columns={columns}

@@ -8,17 +8,21 @@ import { getShedules } from "@/lib/Apis/emailShedulesApis/api";
 import { EmailShedulesProps } from "@/lib/type";
 import { Popover } from "antd"
 import CreateEditShedule from "./CreateEditShedule";
+import { useDebounce } from "@/helpers/helper";
 const Sheduler = () => {
     const [search, setSearch] = useState<string>("");
     const [isPopper, setIsPopper] = useState<boolean>(false);
-    const [shedules, setShedules] = useState<EmailShedulesProps[]>([])
+    const [shedules, setShedules] = useState<EmailShedulesProps[] | undefined>()
+
+    const debouncedSearch = useDebounce(search, 500);
 
     const handleOpenChange = (newOpen: boolean) => {
         setIsPopper(newOpen);
     };
 
-    const gettingShedules = () => {
-        getShedules().then((data) => {
+    const gettingShedules = (search: string) => {
+        setShedules(undefined);
+        getShedules(search).then((data) => {
             console.log(data)
             setShedules(data);
         }).catch((err) => {
@@ -27,8 +31,8 @@ const Sheduler = () => {
     }
 
     useEffect(() => {
-        gettingShedules();
-    }, [])
+        gettingShedules(debouncedSearch);
+    }, [debouncedSearch])
 
     return (
         <div className='flex flex-col gap-y-6 py-5 px-10'>
@@ -37,7 +41,10 @@ const Sheduler = () => {
                     id={"searchshedules"}
                     name={"searchshedules"}
                     value={search}
-                    onChange={(e) => setSearch(e.target.value)}
+                    onChange={(e) => {
+                        setShedules(undefined)
+                        setSearch(e.target.value)
+                    }}
                 />
                 <Popover
                     open={isPopper}

@@ -3,7 +3,7 @@ import { EmailShedulesProps } from "@/lib/type";
 
 export async function getShedules(search?: string) {
     try {
-        const apiurl = `${process.env.BACKEND_URL}/shedules` + (search ? `&search=${search}` : "")
+        const apiurl = `${process.env.BACKEND_URL}/shedules` + (search ? `?search=${search}` : "")
         const data = await axios.get(apiurl)
         return data.data;
     } catch (error) {
