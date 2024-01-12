@@ -3,8 +3,19 @@ import { EmailShedulesProps } from "@/lib/type";
 import { MdEdit } from "react-icons/md";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { ShedulesTableProps } from "@/lib/type";
+import { deleteShedule } from "@/lib/Apis/emailShedulesApis/api";
+import { message } from 'antd'
 const EmailShedulesTable = (props: ShedulesTableProps) => {
-    const { shedules } = props;
+    const { shedules, gettingShedules } = props;
+
+    const sheduleDelete = (id: string) => {
+        deleteShedule(id).then((data) => {
+            if (data.statusText == "OK") message.success("Shedule Deleted Successfully")
+            gettingShedules();
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
 
     const columns: ColumnsType<EmailShedulesProps> = [
         {
@@ -35,7 +46,14 @@ const EmailShedulesTable = (props: ShedulesTableProps) => {
         {
             title: 'Actions',
             dataIndex: '_id',
-            render: (_, { _id }) => (<div className="flex gap-x-4 items-center text-lg"><MdEdit /> <RiDeleteBin5Line className="text-purple" /></div>),
+            render: (_, { _id }) => (<div className="flex gap-x-4 items-center text-lg">
+                <MdEdit className="cursor-pointer" />
+                <RiDeleteBin5Line
+                    onClick={() => {
+                        if (_id) sheduleDelete(_id)
+                    }}
+                    className="text-purple cursor-pointer hover:text-red-500" />
+            </div>),
             className: '!text-[14px] !font-medium !leading-[150%] !text-[#1E3146]'
         },
     ];
@@ -50,7 +68,7 @@ const EmailShedulesTable = (props: ShedulesTableProps) => {
                 columns={columns}
                 dataSource={shedules}
                 rowKey={"_id"}
-                className='cursor-pointer max-w-[100%] max-h-[500px]'
+                className='max-w-[100%] max-h-[500px]'
                 pagination={false}
                 sticky={true}
             />

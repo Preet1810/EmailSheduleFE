@@ -20,3 +20,13 @@ export async function createShedule(values: EmailShedulesProps) {
         throw (error);
     }
 }
+
+export async function deleteShedule(id: string) {
+    try {
+        const apiurl = `${process.env.BACKEND_URL}/shedules/${id}`;
+        const data = await axios.delete(apiurl);
+        return data;
+    } catch (error) {
+        throw (error);
+    }
+}

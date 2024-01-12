@@ -33,7 +33,8 @@ export interface EmailShedulesProps {
 }
 
 export interface ShedulesTableProps {
-    shedules: EmailShedulesProps[] | undefined
+    shedules: EmailShedulesProps[] | undefined;
+    gettingShedules: any
 }
 
 export interface CreateEditSheduleProps {
