@@ -8,6 +8,7 @@ import SelectWeekDay from "./SelectWeekDay"
 import TimePickerUI from "./TimePickerUI"
 import { createShedule } from "@/lib/Apis/emailShedulesApis/api"
 import { EmailShedulesProps } from "@/lib/type"
+import { message } from "antd"
 const CreateEditShedule = (props: CreateEditSheduleProps) => {
     const { mode, setIsPopper, gettingShedules } = props
 
@@ -21,10 +22,10 @@ const CreateEditShedule = (props: CreateEditSheduleProps) => {
     }
 
     const sheduleCreate = (values: EmailShedulesProps) => {
-
         createShedule(values)
             .then((data) => {
-                console.log(data);
+                if (data.statusText == "OK") message.success("Shedule Created Successfully")
+                gettingShedules();
             })
             .catch((err) => {
                 console.error(err)
@@ -33,12 +34,11 @@ const CreateEditShedule = (props: CreateEditSheduleProps) => {
 
     const formik = useFormik({
         initialValues: initialValues,
-        onSubmit: async (values) => {
+        onSubmit: async (values, { resetForm }) => {
             try {
-                const data = await sheduleCreate(values)
-                await gettingShedules();
+                sheduleCreate(values)
+                resetForm()
                 setIsPopper(false);
-                formik.handleReset;
             } catch (error) {
                 console.log(error)
             }

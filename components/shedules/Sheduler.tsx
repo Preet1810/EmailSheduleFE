@@ -60,6 +60,7 @@ const Sheduler = () => {
                 </Popover>
             </div>
             <EmailShedulesTable
+
                 shedules={shedules}
             />
         </div>

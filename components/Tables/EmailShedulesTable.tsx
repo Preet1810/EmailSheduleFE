@@ -41,16 +41,18 @@ const EmailShedulesTable = (props: ShedulesTableProps) => {
     ];
 
     return (
-        <div className="flex flex-col flex-grow overflow-y-auto  w-full">
+        <div
+            className="flex flex-col flex-grow">
             <Table
                 loading={shedules ? false : true}
                 bordered={false}
-                scroll={{ x: 'max-content' }}
+                scroll={{ x: 'max-content', y: `calc(100vh - 250px)` }}
                 columns={columns}
                 dataSource={shedules}
                 rowKey={"_id"}
-                className='cursor-pointer max-w-[100%]'
+                className='cursor-pointer max-w-[100%] max-h-[500px]'
                 pagination={false}
+                sticky={true}
             />
         </div>
     )

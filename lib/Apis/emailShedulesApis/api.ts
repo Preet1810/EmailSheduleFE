@@ -15,7 +15,7 @@ export async function createShedule(values: EmailShedulesProps) {
     try {
         const apiurl = `${process.env.BACKEND_URL}/shedules`
         const data = await axios.post(apiurl, values)
-        return data.data;
+        return data;
     } catch (error) {
         throw (error);
     }
