@@ -1,12 +1,29 @@
 'use client'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchInput from "../Inputs/SearchInput"
 import IconButton from "../Buttons/IconButton";
 import { MdAddCircleOutline } from "react-icons/md";
 import EmailShedulesTable from "../Tables/EmailShedulesTable";
+import { getShedules } from "@/lib/Apis/emailShedulesApis/api";
+import { EmailShedulesProps } from "@/lib/type";
 const Sheduler = () => {
     const [search, setSearch] = useState<string>("");
     const [isPopper, setIsPopper] = useState<boolean>(false);
+    const [shedules, setShedules] = useState<EmailShedulesProps[]>([])
+
+    const gettingShedules = () => {
+        getShedules().then((data) => {
+            console.log(data)
+            setShedules(data);
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+
+    useEffect(() => {
+        gettingShedules();
+    }, [])
+
     return (
         <div className='flex flex-col gap-y-6 py-5 px-10'>
             <div className='flex justify-between'>
@@ -22,7 +39,9 @@ const Sheduler = () => {
                     name="Add"
                 />
             </div>
-            <EmailShedulesTable />
+            <EmailShedulesTable
+                shedules={shedules}
+            />
         </div>
     )
 }

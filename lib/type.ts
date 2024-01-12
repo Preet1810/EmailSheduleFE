@@ -20,3 +20,7 @@ export interface EmailShedulesProps {
     repeat: string;
     time: string;
 }
+
+export interface ShedulesTableProps {
+    shedules: EmailShedulesProps[]
+}
