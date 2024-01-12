@@ -1,9 +1,4 @@
-
-interface IconButtonProps {
-    icon: any;
-    name: string;
-    onClick: () => void;
-}
+import { IconButtonProps } from "@/lib/type";
 
 const IconButton = (props: IconButtonProps) => {
     const { icon, name, onClick } = props;

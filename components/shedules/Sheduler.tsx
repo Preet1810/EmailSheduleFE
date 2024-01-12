@@ -3,6 +3,7 @@ import { useState } from "react";
 import SearchInput from "../Inputs/SearchInput"
 import IconButton from "../Buttons/IconButton";
 import { MdAddCircleOutline } from "react-icons/md";
+import EmailShedulesTable from "../Tables/EmailShedulesTable";
 const Sheduler = () => {
     const [search, setSearch] = useState<string>("");
     const [isPopper, setIsPopper] = useState<boolean>(false);
@@ -20,8 +21,8 @@ const Sheduler = () => {
                     icon={<MdAddCircleOutline />}
                     name="Add"
                 />
-
             </div>
+            <EmailShedulesTable />
         </div>
     )
 }
