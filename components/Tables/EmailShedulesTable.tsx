@@ -19,6 +19,7 @@ const EmailShedulesTable = (props: ShedulesTableProps) => {
             dataIndex: 'description',
             render: (_, { description }) => (<p className="!font-normal">{description}</p>),
             className: '!text-[14px] !font-medium !leading-[150%] !text-[#1E3146]',
+            width: "40rem"
         },
         {
             title: 'Subject',
@@ -48,6 +49,7 @@ const EmailShedulesTable = (props: ShedulesTableProps) => {
                 scroll={{ x: 'max-content' }}
                 columns={columns}
                 dataSource={shedules}
+                rowKey={"_id"}
                 className='cursor-pointer max-w-[100%]'
                 pagination={false}
             />

@@ -6,10 +6,16 @@ import { MdAddCircleOutline } from "react-icons/md";
 import EmailShedulesTable from "../Tables/EmailShedulesTable";
 import { getShedules } from "@/lib/Apis/emailShedulesApis/api";
 import { EmailShedulesProps } from "@/lib/type";
+import { Popover } from "antd"
+import CreateEditShedule from "./CreateEditShedule";
 const Sheduler = () => {
     const [search, setSearch] = useState<string>("");
     const [isPopper, setIsPopper] = useState<boolean>(false);
     const [shedules, setShedules] = useState<EmailShedulesProps[]>([])
+
+    const handleOpenChange = (newOpen: boolean) => {
+        setIsPopper(newOpen);
+    };
 
     const gettingShedules = () => {
         getShedules().then((data) => {
@@ -33,11 +39,18 @@ const Sheduler = () => {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
-                <IconButton
-                    onClick={() => setIsPopper(!isPopper)}
-                    icon={<MdAddCircleOutline />}
-                    name="Add"
-                />
+                <Popover
+                    open={isPopper}
+                    onOpenChange={handleOpenChange}
+                    content={<CreateEditShedule setIsPopper={setIsPopper} mode="create" gettingShedules={gettingShedules} />}
+                    trigger="click"
+                    placement="bottomLeft">
+                    <IconButton
+                        onClick={() => setIsPopper(!isPopper)}
+                        icon={<MdAddCircleOutline />}
+                        name="Add"
+                    />
+                </Popover>
             </div>
             <EmailShedulesTable
                 shedules={shedules}
