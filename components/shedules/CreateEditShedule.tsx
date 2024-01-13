@@ -10,10 +10,12 @@ import { createShedule, editShedule } from "@/lib/Apis/emailShedulesApis/api"
 import { EmailShedulesProps } from "@/lib/type"
 import { message } from "antd"
 import { getSingleShedule } from "@/lib/Apis/emailShedulesApis/api"
-import { useEffect, useCallback, useState } from "react"
+import { useEffect } from "react"
+import { validationSchemaAddEditShedule } from "@/lib/formvalidations"
+import { Input } from "antd"
 const CreateEditShedule = (props: CreateEditSheduleProps) => {
     const { mode, setIsPopper, gettingShedules, sheduleId } = props
-
+    const { TextArea } = Input
     const initialValues = {
         title: "",
         description: "",
@@ -61,6 +63,7 @@ const CreateEditShedule = (props: CreateEditSheduleProps) => {
 
     const formik = useFormik({
         initialValues: initialValues,
+        validationSchema: validationSchemaAddEditShedule,
         onSubmit: async (values, { resetForm }) => {
             try {
                 if (mode === "create") {
@@ -78,11 +81,10 @@ const CreateEditShedule = (props: CreateEditSheduleProps) => {
 
 
     useEffect(() => {
-        console.log("i ran", mode, sheduleId);
         if (mode === "edit" && sheduleId) getShedule(sheduleId);
     }, [mode, sheduleId]);
     return (
-        <div className="w-[336px] h-[400px] flex flex-col gap-y-5">
+        <div className="w-[336px] h-full flex flex-col gap-y-5">
             <h2 className="text-[16px] font-[600] text-[#333333]">{mode === "create" ? "Add" : "Edit"} Schedule</h2>
             <form onSubmit={formik.handleSubmit} className="flex flex-col gap-y-4">
                 <div className="flex gap-x-6 items-center">
@@ -96,6 +98,7 @@ const CreateEditShedule = (props: CreateEditSheduleProps) => {
                         value={formik.values.title}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
+                        error={formik.errors.title && formik.touched.title ? true : false}
                     />
                 </div>
                 <div className="flex gap-x-6">
@@ -104,14 +107,17 @@ const CreateEditShedule = (props: CreateEditSheduleProps) => {
                         htmlFor="description"
                         title="Description"
                     />
-                    <textarea
+                    <TextArea
                         className="bg-transparent focus:outline-none w-full rounded-md border-2 border-grey py-2 px-3 resize-none"
                         name="description"
                         id="description"
+                        status={formik.errors.description && formik.touched.description ? "error" : ""}
                         value={formik.values.description}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        rows={2}></textarea>
+                        rows={2}
+                        allowClear
+                    />
                 </div>
                 <div className="flex gap-x-6 items-center">
                     <AddEditSheduleLabel
@@ -124,6 +130,7 @@ const CreateEditShedule = (props: CreateEditSheduleProps) => {
                         value={formik.values.subject}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
+                        error={formik.errors.subject && formik.touched.subject ? true : false}
                     />
                 </div>
                 <div className="flex gap-x-6 items-center">

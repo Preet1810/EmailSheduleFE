@@ -4,16 +4,11 @@ import { MdEdit } from "react-icons/md";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { ShedulesTableProps } from "@/lib/type";
 import { deleteShedule } from "@/lib/Apis/emailShedulesApis/api";
-import { message, Popover } from 'antd'
-import CreateEditShedule from "../shedules/CreateEditShedule";
-import { useState } from "react";
+import { message } from 'antd'
 import PopoverEdit from "../shedules/PopoverEdit";
+import { formatTimeString } from "@/helpers/helper";
 const EmailShedulesTable = (props: ShedulesTableProps) => {
     const { shedules, gettingShedules } = props;
-    // const handleOpenChange = (newOpen: boolean) => {
-    //     console.log(newOpen)
-    //     setIsPopper(newOpen);
-    // };
 
     const sheduleDelete = (id: string) => {
         deleteShedule(id).then((data) => {
@@ -29,26 +24,34 @@ const EmailShedulesTable = (props: ShedulesTableProps) => {
             title: 'Title',
             dataIndex: 'title',
             render: (_, { title }) => (<p className="!font-normal">{title}</p>),
-            className: '!text-[14px] !font-medium !leading-[150%] !text-[#1E3146] ',
+            className: 'text-[14px] font-[600] leading-[150%] text-[#1E3146] ',
         },
         {
             title: 'Description',
             dataIndex: 'description',
-            render: (_, { description }) => (<p className="!font-normal">{description}</p>),
-            className: '!text-[14px] !font-medium !leading-[150%] !text-[#1E3146]',
-            width: "40rem"
+            render: (_, { description }) => (
+                <p
+                    className="!font-normal max-w-[25rem] overflow-hidden line-clamp-2"
+                    style={{ WebkitBoxOrient: 'vertical' }}
+                >
+                    {description}
+                </p>
+            ),
+            className: '!text-[14px] font-[600]  !text-[#1E3146]',
+            width: "30rem"
         },
         {
             title: 'Subject',
             dataIndex: 'subject',
             render: (_, { subject }) => (<p className="!font-normal">{subject}</p>),
-            className: '!text-[14px] !font-medium !leading-[150%] !text-[#1E3146]',
+            className: '!text-[14px] font-[600] !leading-[150%] !text-[#1E3146]',
         },
         {
             title: 'Shedule',
             dataIndex: 'frequency',
-            render: (_, { frequency, time }) => (<p className="!font-normal">{frequency + " at " + time}</p>),
-            className: '!text-[14px] !font-medium !leading-[150%] !text-[#1E3146]'
+            render: (_, { frequency, time }) => (<p className="!font-normal">{frequency + " at " + formatTimeString(time)}</p>),
+            className: '!text-[14px] font-[600] !leading-[150%] !text-[#1E3146]',
+            width: "15rem"
         },
         {
             title: 'Actions',
@@ -64,7 +67,7 @@ const EmailShedulesTable = (props: ShedulesTableProps) => {
                     }}
                     className="text-purple cursor-pointer hover:text-red-500" />
             </div>),
-            className: '!text-[14px] !font-medium !leading-[150%] !text-[#1E3146]'
+            className: '!text-[14px] font-[600] !leading-[150%] !text-[#1E3146]'
         },
     ];
 

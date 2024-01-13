@@ -6,6 +6,7 @@ export interface SearchBarProps {
     onChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
     onBlur?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
     value: string;
+    error?: boolean;
 }
 
 

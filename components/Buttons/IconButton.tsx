@@ -5,7 +5,7 @@ const IconButton = (props: IconButtonProps) => {
     return (
         <button
             onClick={onClick}
-            className="bg-purple w-[73px] h-[38px] rounded-md flex items-center justify-center text-white  px-2"
+            className="bg-purple w-[83px] h-[38px] rounded-md flex items-center justify-center text-white  px-2"
         >
             <div className="w-1/2 text-2xl">
                 {icon}

@@ -1,8 +1,9 @@
 import { SearchBarProps } from "@/lib/type"
+import { Input } from 'antd';
 const AddEditSheduleInput = (props: SearchBarProps) => {
-    const { id, name, onChange, value, onBlur } = props;
+    const { id, name, onChange, value, onBlur, error } = props;
     return (
-        <input
+        <Input
             id={id}
             name={name}
             type="text"
@@ -10,6 +11,8 @@ const AddEditSheduleInput = (props: SearchBarProps) => {
             onChange={onChange}
             onBlur={onBlur}
             className="bg-transparent focus:outline-none w-full h-[38px] rounded-md border-2 border-grey px-3"
+            status={error ? "error" : ""}
+            allowClear
         />
     )
 }
