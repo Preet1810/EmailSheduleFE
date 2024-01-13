@@ -20,7 +20,7 @@ const TimePickerUI = (props: TimePickerUIProps) => {
     <>
       {time && (
         <TimePicker
-          defaultValue={time ? time : dayjs(Date.now())}
+          defaultValue={time}
           style={{ width: "100%" }}
           use12Hours
           format="h:mm a"

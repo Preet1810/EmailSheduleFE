@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react'
-
+import { Dayjs } from 'dayjs';
 export interface SearchBarProps {
     id: string;
     name: string;
@@ -24,13 +24,13 @@ export interface NormalButtonProps {
 }
 
 export interface EmailShedulesProps {
-    _id?: string
+    _id?: string;
     title: string;
     description: string;
     subject: string;
     frequency: string;
     repeat?: string;
-    time: string;
+    time: Dayjs | string;
 }
 
 export interface ShedulesTableProps {

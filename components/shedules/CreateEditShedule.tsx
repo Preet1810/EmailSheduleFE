@@ -13,6 +13,8 @@ import { getSingleShedule } from "@/lib/Apis/emailShedulesApis/api"
 import { useEffect } from "react"
 import { validationSchemaAddEditShedule } from "@/lib/formvalidations"
 import { Input } from "antd"
+import dayjs from 'dayjs';
+
 const CreateEditShedule = (props: CreateEditSheduleProps) => {
     const { mode, setIsPopper, gettingShedules, sheduleId } = props
 
@@ -24,8 +26,8 @@ const CreateEditShedule = (props: CreateEditSheduleProps) => {
         subject: "",
         frequency: "Daily",
         repeat: "",
-        time: ""
-    }
+        time: mode === "edit" ? "" : dayjs(Date.now())
+    };
 
     const getShedule = (id: string) => {
         getSingleShedule(id).then((data) => {
@@ -80,7 +82,10 @@ const CreateEditShedule = (props: CreateEditSheduleProps) => {
 
 
     useEffect(() => {
-        if (mode === "edit" && sheduleId) getShedule(sheduleId);
+        if (mode === "edit" && sheduleId) {
+            getShedule(sheduleId);
+
+        }
     }, [mode, sheduleId]);
     return (
         <div className="w-full h-full flex flex-col gap-y-5">
