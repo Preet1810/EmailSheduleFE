@@ -34,7 +34,7 @@ const Sheduler = () => {
     }, [debouncedSearch])
 
     return (
-        <div className='flex flex-col gap-y-6 py-5 px-10'>
+        <div className='flex flex-col gap-y-6 '>
             <div className='flex justify-between gap-x-5'>
                 <SearchInput
 

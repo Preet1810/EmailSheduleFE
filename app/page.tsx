@@ -1,16 +1,20 @@
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 import Sheduler from '@/components/shedules/Sheduler'
-const EmailShedules = () => {
+const EmailSchedules = () => {
   return (
-    <div className=' h-[100vh] w-full flex bg-white pt-16'>
-      <Sidebar />
-      <div className=' bg-light-grey w-full'>
+    <div className='flex bg-white overflow-hidden pt-16 h-full'>
+      <div className='min-w-[72px] h-[calc(100vh-4rem)]'>
+        <Sidebar />
+      </div>
+      <div className='flex flex-col flex-1 overflow-hidden'>
         <Navbar />
-        <Sheduler />
+        <div className='flex-1 overflow-x-hidden overflow-y-auto p-6 bg-light-grey'>
+          <Sheduler />
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default EmailShedules
+export default EmailSchedules

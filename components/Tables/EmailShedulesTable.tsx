@@ -24,7 +24,7 @@ const EmailShedulesTable = (props: ShedulesTableProps) => {
             title: 'Title',
             dataIndex: 'title',
             render: (_, { title }) => (<p className="!font-normal">{title}</p>),
-            className: 'text-[14px] font-[600] leading-[150%] text-[#1E3146] ',
+            className: 'text-[14px] font-[600]  text-[#1E3146] ',
         },
         {
             title: 'Description',
@@ -37,26 +37,25 @@ const EmailShedulesTable = (props: ShedulesTableProps) => {
                     {description}
                 </p>
             ),
+            width: "30rem",
             className: '!text-[14px] font-[600]  !text-[#1E3146]',
-            width: "30rem"
         },
         {
             title: 'Subject',
             dataIndex: 'subject',
             render: (_, { subject }) => (<p className="!font-normal">{subject}</p>),
             className: '!text-[14px] font-[600] !leading-[150%] !text-[#1E3146]',
-            width: "10rem"
         },
         {
             title: 'Schedule',
             dataIndex: 'frequency',
             render: (_, { frequency, time, repeat }) => (
                 <p className="!font-normal">
-                    {frequency + (frequency === "Weekly" || "Monthly" ? ` on ${repeat}` : "") + " at " + formatTimeString(time)}
+                    {frequency + ((frequency === "Weekly" || frequency === "Monthly") ? ` on ${repeat}` : "") + " at " + formatTimeString(time)}
                 </p>
+
             ),
             className: '!text-[14px] font-[600] !leading-[150%] !text-[#1E3146]',
-            width: "13rem"
         },
         {
             title: 'Actions',
@@ -78,7 +77,7 @@ const EmailShedulesTable = (props: ShedulesTableProps) => {
 
     return (
         <div
-            className="flex flex-col flex-grow max-h-[500px] overflow-y-auto">
+            className="flex flex-col flex-grow max-h-[500px] overflow-y-auto ">
             <Table
                 loading={shedules ? false : true}
                 bordered={false}

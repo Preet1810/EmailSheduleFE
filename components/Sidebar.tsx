@@ -1,7 +1,7 @@
 
 const Sidebar = () => {
     return (
-        <div className="bg-purple w-[72px] h-full">
+        <div className="bg-purple h-full w-full">
 
         </div>
     )
