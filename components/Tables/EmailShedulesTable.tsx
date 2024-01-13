@@ -25,6 +25,7 @@ const EmailShedulesTable = (props: ShedulesTableProps) => {
             dataIndex: 'title',
             render: (_, { title }) => (<p className="!font-normal">{title}</p>),
             className: 'text-[14px] font-[600]  text-[#1E3146] ',
+            width: "16rem"
         },
         {
             title: 'Description',
@@ -56,6 +57,7 @@ const EmailShedulesTable = (props: ShedulesTableProps) => {
 
             ),
             className: '!text-[14px] font-[600] !leading-[150%] !text-[#1E3146]',
+            width: "14rem"
         },
         {
             title: 'Actions',
