@@ -140,15 +140,20 @@ const CreateEditShedule = (props: CreateEditSheduleProps) => {
                     <Select
                         value={formik.values.frequency}
                         style={{ width: '100%' }}
-                        onChange={(value) => formik.setFieldValue('frequency', value)}
+                        onChange={(value) => {
+                            if (value === "Monthly") {
+                                formik.setFieldValue('repeat', "First Monday")
+                            }
+                            formik.setFieldValue('frequency', value)
+                        }}
                         options={[
                             { value: 'Daily', label: 'Daily' },
+                            { value: 'Weekly', label: 'Weekly' },
                             { value: 'Monthly', label: 'Monthly' },
-                            { value: 'Yearly', label: 'Yearly' },
                         ]}
                     />
                 </div>
-                {formik.values.frequency !== "Daily" && (
+                {formik.values.frequency === "Weekly" && (
                     <div className="flex gap-x-6 items-center">
                         <AddEditSheduleLabel
                             htmlFor="repeat"
@@ -156,6 +161,23 @@ const CreateEditShedule = (props: CreateEditSheduleProps) => {
                         />
                         <SelectWeekDay
                             formik={formik}
+                        />
+                    </div>
+                )}
+                {formik.values.frequency === "Monthly" && (
+                    <div className="flex gap-x-6 items-center">
+                        <AddEditSheduleLabel
+                            htmlFor="repeat"
+                            title="Repeat"
+                        />
+                        <Select
+                            value={formik.values.repeat}
+                            style={{ width: '100%' }}
+                            onChange={(value) => formik.setFieldValue('repeat', value)}
+                            options={[
+                                { value: 'First Monday', label: 'First Monday' },
+                                { value: 'Last Friday', label: 'Last Friday' },
+                            ]}
                         />
                     </div>
                 )}

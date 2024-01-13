@@ -48,9 +48,13 @@ const EmailShedulesTable = (props: ShedulesTableProps) => {
             width: "10rem"
         },
         {
-            title: 'Shedule',
+            title: 'Schedule',
             dataIndex: 'frequency',
-            render: (_, { frequency, time }) => (<p className="!font-normal">{frequency + " at " + formatTimeString(time)}</p>),
+            render: (_, { frequency, time, repeat }) => (
+                <p className="!font-normal">
+                    {frequency + (frequency === "Weekly" || "Monthly" ? ` on ${repeat}` : "") + " at " + formatTimeString(time)}
+                </p>
+            ),
             className: '!text-[14px] font-[600] !leading-[150%] !text-[#1E3146]',
             width: "13rem"
         },
@@ -74,7 +78,7 @@ const EmailShedulesTable = (props: ShedulesTableProps) => {
 
     return (
         <div
-            className="flex flex-col flex-grow">
+            className="flex flex-col flex-grow max-h-[500px] overflow-y-auto">
             <Table
                 loading={shedules ? false : true}
                 bordered={false}
