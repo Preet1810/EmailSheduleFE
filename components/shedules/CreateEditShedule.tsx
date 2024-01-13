@@ -15,7 +15,9 @@ import { validationSchemaAddEditShedule } from "@/lib/formvalidations"
 import { Input } from "antd"
 const CreateEditShedule = (props: CreateEditSheduleProps) => {
     const { mode, setIsPopper, gettingShedules, sheduleId } = props
+
     const { TextArea } = Input
+
     const initialValues = {
         title: "",
         description: "",
@@ -24,8 +26,6 @@ const CreateEditShedule = (props: CreateEditSheduleProps) => {
         repeat: "",
         time: ""
     }
-
-
 
     const getShedule = (id: string) => {
         console.log("yo");
@@ -84,7 +84,7 @@ const CreateEditShedule = (props: CreateEditSheduleProps) => {
         if (mode === "edit" && sheduleId) getShedule(sheduleId);
     }, [mode, sheduleId]);
     return (
-        <div className="w-[336px] h-full flex flex-col gap-y-5">
+        <div className="w-full h-full flex flex-col gap-y-5">
             <h2 className="text-[16px] font-[600] text-[#333333]">{mode === "create" ? "Add" : "Edit"} Schedule</h2>
             <form onSubmit={formik.handleSubmit} className="flex flex-col gap-y-4">
                 <div className="flex gap-x-6 items-center">

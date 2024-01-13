@@ -19,7 +19,7 @@ const PopoverEdit = (props: PopoverEditProps) => {
             onOpenChange={handleOpenChange}
             content={<CreateEditShedule sheduleId={sheduleId} setIsPopper={setIsPopper} mode="edit" gettingShedules={gettingShedules} />}
             trigger="click"
-            placement="left"
+            placement="bottom"
         >
 
             <MdEdit onClick={() => setIsPopper(!isPopper)} className="cursor-pointer" />

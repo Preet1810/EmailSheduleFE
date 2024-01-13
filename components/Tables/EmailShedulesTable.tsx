@@ -45,13 +45,14 @@ const EmailShedulesTable = (props: ShedulesTableProps) => {
             dataIndex: 'subject',
             render: (_, { subject }) => (<p className="!font-normal">{subject}</p>),
             className: '!text-[14px] font-[600] !leading-[150%] !text-[#1E3146]',
+            width: "10rem"
         },
         {
             title: 'Shedule',
             dataIndex: 'frequency',
             render: (_, { frequency, time }) => (<p className="!font-normal">{frequency + " at " + formatTimeString(time)}</p>),
             className: '!text-[14px] font-[600] !leading-[150%] !text-[#1E3146]',
-            width: "15rem"
+            width: "13rem"
         },
         {
             title: 'Actions',
