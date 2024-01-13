@@ -23,7 +23,6 @@ const Sheduler = () => {
     const gettingShedules = (search: string) => {
         setShedules(undefined);
         getShedules(search).then((data) => {
-            console.log(data)
             setShedules(data);
         }).catch((err) => {
             console.log(err)

@@ -9,7 +9,6 @@ const PopoverEdit = (props: PopoverEditProps) => {
     const [isPopper, setIsPopper] = useState(false)
 
     const handleOpenChange = (newOpen: boolean) => {
-        console.log(newOpen)
         setIsPopper(newOpen);
     };
 
@@ -21,7 +20,6 @@ const PopoverEdit = (props: PopoverEditProps) => {
             trigger="click"
             placement="bottom"
         >
-
             <MdEdit onClick={() => setIsPopper(!isPopper)} className="cursor-pointer" />
         </Popover>
     )

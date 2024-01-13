@@ -12,7 +12,7 @@ const EmailShedulesTable = (props: ShedulesTableProps) => {
 
     const sheduleDelete = (id: string) => {
         deleteShedule(id).then((data) => {
-            if (data.statusText == "OK") message.success("Shedule Deleted Successfully")
+            message.success("Shedule Deleted Successfully")
             gettingShedules();
         }).catch((err) => {
             console.log(err)

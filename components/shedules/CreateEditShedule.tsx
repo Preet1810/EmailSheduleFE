@@ -28,7 +28,6 @@ const CreateEditShedule = (props: CreateEditSheduleProps) => {
     }
 
     const getShedule = (id: string) => {
-        console.log("yo");
         getSingleShedule(id).then((data) => {
             console.log(data);
             formik.setValues({
@@ -42,7 +41,7 @@ const CreateEditShedule = (props: CreateEditSheduleProps) => {
     const sheduleEdit = (values: EmailShedulesProps, id: string) => {
         editShedule(values, id)
             .then((data) => {
-                if (data.statusText == "OK") message.success("Shedule Edited Successfully")
+                message.success("Shedule Edited Successfully")
                 gettingShedules();
             }).catch((err) => {
                 console.log(err)
@@ -53,7 +52,7 @@ const CreateEditShedule = (props: CreateEditSheduleProps) => {
     const sheduleCreate = (values: EmailShedulesProps) => {
         createShedule(values)
             .then((data) => {
-                if (data.statusText == "OK") message.success("Shedule Created Successfully")
+                message.success("Shedule Created Successfully")
                 gettingShedules();
             })
             .catch((err) => {
